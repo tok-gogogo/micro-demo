@@ -1,4 +1,6 @@
-import { fetchSource } from "../common/utils";
+import { CompletionPath, fetchSource } from "../common/utils";
+import scopedCSS from "../scope/scopedcss";
+// import scopedCSS2 from "../scope/scopedcss_string";
 
 export default function loadHtml(app) {
   fetchSource(app.url)
@@ -17,12 +19,12 @@ export default function loadHtml(app) {
       // 将html字符串转化为DOM结构
       const htmlDom = document.createElement("div");
       htmlDom.innerHTML = html;
-      console.log("html:", htmlDom);
+      // console.log("html:", htmlDom);
 
       // 进一步提取和处理js、css等静态资源
       extractSourceDom(htmlDom, app);
 
-      console.log(app.source.links, app.source.scripts);
+      // console.log(app.source.links, app.source.scripts);
 
       // 如果有远程css资源，则通过fetch请求
       if (app.source.links.length) {
@@ -73,13 +75,15 @@ function extractSourceDom(parent, app) {
       app.source.links.push({
         code: styleCode,
       });
+      parent.removeChild(dom);
+
     } else if (dom instanceof HTMLScriptElement) {
       // 并提取js地址
       const src = dom.getAttribute("src");
       if (src) {
         // 远程script
         app.source.scripts.push({
-          url: src,
+          url: CompletionPath(src,app.url),
         });
       } else if (dom.textContent) {
         // 内联script
@@ -108,8 +112,13 @@ export function fetchLinksFromHtml(app, htmlDom) {
   Promise.all(fetchLinkPromise)
     .then((res) => {
       for (let i = 0; i < res.length; i++) {
-        let code = res[i];
-        links.push(code);
+        // let parseCode =  scopedCSS(res[i],app.name);
+        // let parseCode =  scopedCSS2(res[i],app);
+
+        
+        let parseCode =  res[i];
+
+        links.push(parseCode);
       }
       app.source.links = links;
       // 处理完成后执行onLoad方法

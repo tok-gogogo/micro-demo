@@ -16,10 +16,10 @@ ReactDOM.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 
-window.globalStr='child'
+window.testStr='child'
 
 // window.addEventListener('scroll', () => {
 //   console.log('scroll')
 // })
-console.log(1111, window)
+// console.log(1111, window)
 

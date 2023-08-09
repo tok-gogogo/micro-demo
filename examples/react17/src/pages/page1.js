@@ -4,6 +4,19 @@ import logo from '../logo.svg';
 import './page1.css';
 
 function App() {
+
+  function handleResize(event) {
+    console.log('this is a resize event',event)
+  }
+
+  React.useEffect(() => {
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -20,7 +33,9 @@ function App() {
           Learn React
         </a>
         <Link to='/page2'>跳转page2</Link>
-        <div className='text-color'>我是子应用的文字</div>
+        <div className='text-color'>
+          我是子应用的文字2
+        </div>
       </header>
     </div>
   );

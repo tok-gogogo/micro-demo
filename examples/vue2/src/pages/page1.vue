@@ -3,13 +3,13 @@
     <HelloWorld :msg="'基座应用vue@' + version" />
     <div @click="toggleMicroApp" class='toggle-btn'>展示/隐藏</div>
     <div class='text-color'>我是基座应用的文字</div>
-    <!-- <micro-demo
-      name='app'
+    <micro-demo
+      name='test-app'
       url='http://localhost:3001/'
       v-if='showapp'
       id='micro-demo-app1'
-    ></micro-demo> -->
-    <div id="my-container" ></div>
+    ></micro-demo>
+    <!-- <div id="my-container" ></div> -->
 
   </div>
 </template>
@@ -66,3 +66,5 @@ export default {
   }
 
 </style>
+
+

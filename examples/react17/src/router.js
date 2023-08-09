@@ -1,12 +1,12 @@
 import React, { lazy, Suspense } from 'react'
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import { HashRouter, Switch, Route, Redirect } from 'react-router-dom'
 import Page1 from './pages/page1'
 
 const Page2 = lazy(() => import(/* webpackChunkName: "page2" */ './pages/page2'))
 
 function AppRouter () {
   return (
-    <BrowserRouter basename='/react17/'>
+    <HashRouter basename='/react17/'>
       <Switch>
         <Route path="/" exact>
           <Page1 />
@@ -18,7 +18,7 @@ function AppRouter () {
         </Route>
         <Redirect to='/' />
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
